@@ -1,0 +1,18 @@
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+  SET_MESSAGE,
+} from "./types";
+
+export default () {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (user && user.accessToken) {
+    return { Authorization: 'Bearer ' + user.accessToken };
+  } else {
+    return {};
+  }
+}

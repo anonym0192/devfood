@@ -122,14 +122,25 @@ export const CupomCodeArea = styled.div`
 
 margin: 25px 0;
 
+span{
+    color: #e4dfe1;
+    font-size: 12px;
+}
+
 input{
-    width: 100%;
+    width: 60%;
     height: 35px;
     border: none;
     border-radius: 10px;
     padding: 0px 10px;
     font-size: 17px;
 }
+
+a, a:visited{
+    font-size: 13px;
+    color: #fff;
+}
+
 `;
 export const PriceInfoArea = styled.div`
     display: flex;
@@ -145,7 +156,7 @@ color: #fff;
 border: 0;
 border-radius: 10px;
 font-weight: 600;
-//box-shadow: 2px 3px 0 #00000038;
+box-shadow: 2px 3px 0 #00000038;
 height: 45px;
 font-size: 18px;
 width: 100%;

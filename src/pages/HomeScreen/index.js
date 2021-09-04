@@ -1,20 +1,21 @@
 import React, {useState, useEffect} from 'react';
-import { useHistory, useLocation } from "react-router-dom";
+import Loading from '../../components/Loading';
 import CategoryItem from '../../components/CategoryItem';
 import ProductItem from '../../components/ProductItem';
 import Modal from '../../components/Modal';
 import ProductModal from '../../components/ProductModal';
+import PaginationArea from '../../components/PaginationArea';
 import api from '../../services/api';
 import { useSelector } from 'react-redux';
+import {NotFoundMessage} from '../../AppStyled';
 import ReactToolTip from 'react-tooltip';
 import { 
     Container,  
     CategoryArea, 
     CategoryList,
     ProductArea,
-    ProductList,
-    PaginationArea,
-    PaginationItem } from './styled';
+    ProductList
+} from './styled';
 
 export default () => {
     
@@ -33,19 +34,21 @@ export default () => {
     const [modalStatus, setModalStatus] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState('');
 
+    const [loading, setLoading] = useState(true);
+
     
     const getProducts = async ()=>{
+
+        setLoading(true);
 
         const json = await api.getProducts(activeCategory, activePage, activeSearch);
 
         if(!json.error){
-            setProductsList(json.products);
-            setTotalPages(json.total_pages || '');
-            //if(json.current_page > 1){
-               // setActivePage(json.current_page); 
-                
-            //}           
+            setProductsList(json.products || []);
+            setTotalPages(json.total_pages || '');     
         } 
+
+        setLoading(false);
     }
      
     useEffect(()=>{
@@ -63,8 +66,14 @@ export default () => {
     }, []);
 
     useEffect(()=>{
+        
         getProducts(activeCategory, activePage, activeSearch);
-    }, [activeCategory, activePage, activeSearch]);
+    }, [activePage, activeSearch]);
+
+    useEffect(()=>{
+        setActivePage(1);
+        getProducts(activeCategory, 1, activeSearch);
+    }, [activeCategory]);
 
     const handleProductClick = (product) => {
         setSelectedProduct(product);
@@ -73,7 +82,7 @@ export default () => {
 
     return (
         <Container>
-            {categoriesList.length > 0 &&
+            {categoriesList.length > 0  && 
                 <CategoryArea>                  
                         Selecione uma categoria
                         <CategoryList>
@@ -95,7 +104,9 @@ export default () => {
                 </CategoryArea>
             }
 
-            {productsList.length > 0 &&
+            { loading && <Loading width="50" height="50" /> }
+
+            {productsList.length > 0 && !loading &&
                 <ProductArea>
                     <ProductList>
                         {productsList.map((item, key)=>(
@@ -104,18 +115,12 @@ export default () => {
                     </ProductList>
                 </ProductArea>
             }
-            {totalPages > 1 &&
-                <PaginationArea>
-                    {Array(totalPages).fill(0).map((item, index)=>(
-                        <PaginationItem 
-                            key={index} 
-                            current={index+1} 
-                            active={activePage}
-                            onClick={()=>setActivePage(index+1)}>
-                                {index+1}
-                        </PaginationItem>
-                    ))}
-                </PaginationArea>
+            {productsList.length > 0 && totalPages > 1  && !loading &&
+                <PaginationArea totalPages={totalPages} activePage={activePage} setActivePage={setActivePage} />
+            }
+
+            {productsList?.length == 0 && !loading &&
+                    <NotFoundMessage>Nenhum resultado encontrado</NotFoundMessage>
             }
 
             <Modal status={modalStatus} setStatus={setModalStatus}>

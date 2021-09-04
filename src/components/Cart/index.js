@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import Modal from '../Modal';
 import CheckOutArea from '../CheckOutArea';
 import api from '../../services/api';
 import {isObjectEmpty} from '../../util';
+import { DefaultButton } from '../../AppStyled';
+
 import {
     Title,
     CartArea,
@@ -27,6 +29,11 @@ export default () => {
     const [show, setShow] = useState(true);
     const [modalStatus, setModalStatus] = useState(false);
     
+
+    const [couponCode, setCouponCode] = useState("");
+    const inputCoupon = useRef(null);
+    const [couponStatusMsg, setCouponStatusMsg] = useState("");
+    
     const user = useSelector(state=>state.user.userData);
     const token = useSelector(state=>state.user.token);
     
@@ -35,13 +42,15 @@ export default () => {
     const delivery = useSelector(state=>state.cart.delivery);
     const discount = useSelector(state=>state.cart.discount);
     const shipping = useSelector(state=>state.shipping.shippingData);
-    const cart = useSelector(state=>state.cart);
+    
+  
     
     const dispatch = useDispatch();
 
     const history = useHistory();
 
-    const error = useSelector(state=>state.statusMessage)
+    
+ 
 
     useEffect(()=>{
         history.listen(()=>{
@@ -75,8 +84,41 @@ export default () => {
        setModalStatus(true);
     }
 
-    const handleChangeCupom = (key)=>{
+    const handleApplyCoupon = async (e)=>{
+        
+        if(couponCode){
+            
+            const res = await api.applyCoupon(couponCode);
+
+            if(res.error){
+
+                setCouponStatusMsg("Cupom invalido");
+                setCouponCode("");
+
+            } else if(res.coupon ){
+
+                dispatch({type: 'APPLY_COUPON', payload: {coupon: res.coupon}});
+                dispatch({type: 'CALCULATE_TOTAL'});
+
+                setCouponStatusMsg("Cupom ativado");
+
+                inputCoupon.current.setAttribute("disabled", "disabled");
+            }
+        }
        
+    }
+
+    const handleRemoveCoupon = (e) => {
+
+        e.preventDefault();
+
+        setCouponCode(''); 
+        setCouponStatusMsg('');
+
+        dispatch({type: 'REMOVE_COUPON'});
+        dispatch({type: 'CALCULATE_TOTAL'});
+
+        inputCoupon.current.removeAttribute("disabled");
     }
 
     const handleCheckOut = async ()=>{
@@ -133,7 +175,6 @@ export default () => {
         }catch(e){
 
             dispatch({type: 'SET_ERROR', payload: {message: e.message}});
-            //console.log(error)
         }
 
 
@@ -184,12 +225,17 @@ export default () => {
                         </div>
                     </DeliverAddressArea>
                     <CupomCodeArea>
+                        {couponStatusMsg &&
+                            <span>{couponStatusMsg}</span>
+                        }
                         <Title>Cupom de desconto</Title>
-                        <input name="cupomcode" onChange={handleChangeCupom} />
+                        <input name="cupomcode" onChange={(e) => setCouponCode(e.target.value)} value={couponCode} ref={inputCoupon}/>
+                        <DefaultButton height="35px" onClick={handleApplyCoupon}>Aplicar Cupom</DefaultButton>
+                        <a href="#" onClick={handleRemoveCoupon}>Remover</a>
                     </CupomCodeArea>
                     <PriceInfoArea>
                         <Title>Desconto</Title> 
-                        <span>R$ {discount?.toFixed(2)}</span>  
+                        <span>- R$ {discount}</span>  
                     </PriceInfoArea>
                     <PriceInfoArea>
                         <Title>Taxa de entrega</Title>

@@ -1,5 +1,6 @@
 import React from 'react';
 import {FormButton} from './styled.js';
+import Loading from '../Loading';
 
 export default ({text, type, loading, className, style})=>{
 
@@ -9,7 +10,7 @@ export default ({text, type, loading, className, style})=>{
         
         { !loading && text } 
         
-        { loading && <img src="/assets/images/loading.gif" /> }
+        { loading && <Loading /> }
 
     </FormButton>  
         )

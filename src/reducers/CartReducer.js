@@ -2,6 +2,7 @@ const initialState = {
     products: [],
     discount: 0,
     delivery: 3,
+    coupon: {},
     total: 0
 }
 
@@ -74,6 +75,19 @@ export default (state = initialState, action) => {
 
         case 'CLEAR_CART':
             return {...state, products: []};
+
+        case 'APPLY_COUPON':
+
+            
+            const coupon = action.payload.coupon;
+
+            const discount = coupon.value;
+
+            return {...state, coupon ,discount};
+
+        case 'REMOVE_COUPON':
+
+            return {...state, coupon: {} , discount: 0};
     }
 
     return state;

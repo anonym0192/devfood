@@ -51,6 +51,13 @@ export const SuccessMessage = styled(Message)`
     border-color: #badbcc;
 `;
 
+export const NotFoundMessage = styled.div`
+    font-size: 19px;
+    color: #fff;
+    margin: 50px 15px;
+}
+`;
+
 export const DefaultButton = styled.button`
     background-color: #073c06;
     color: #fff;
@@ -62,3 +69,4 @@ export const DefaultButton = styled.button`
     height: ${props => props.height ? props.height : 'auto'}
   
 `;
+

@@ -76,7 +76,7 @@ export default  () =>{
                 <FormInput setValue={e=>setPassword(e.target.value)} name="password" type="password" placeholder="Senha" style={{borderRadius: "0px 5px 5px 0"}}/>
             </FormGroup>
             <ForgetPasswordLink><a href="#">Esqueceu a senha?</a></ForgetPasswordLink>
-            <FormButton text="Entrar" type="submit" loading={loading} />
+            <FormButton text="Entrar" type="submit" loading={loading} style={{height: '45px'}}/>
             <SignupLink>Não tem conta? <Link to="/register">Cadastre-se agora</Link></SignupLink>
         </Form>
     </Container>

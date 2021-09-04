@@ -79,7 +79,6 @@ export default {
 
         const res = await api.get('/logout', {headers});
 
-        //delete api.defaults.headers.common['Authorization'];
         localStorage.removeItem('token');
         
             
@@ -168,11 +167,12 @@ export default {
         const res = await api.put(`/cart`, formData, {headers});
     },
 
-    getUserOrders: async () => {
+    getUserOrders: async (page) => {
 
         const headers = getAuthorizationHeader();
 
-        const res = await api.get(`/orders`, {headers});
+
+        const res = await api.get(`/orders?page=${page}`, {headers});
 
         if(res.status == 401){
             
@@ -229,76 +229,13 @@ export default {
         
     }, 
 
-   /* addCartItem: async (id) =>{
+   applyCoupon: async (couponCode) => {
 
-        const headers = getAuthorizationHeader();
+    const res = await api.get(`/coupon/${couponCode}`);
 
-        const res = await api.put(`/cart/plus/${id}`, {headers});
+    return res.data;
 
-        if(!res.data.error){
-            return res.data;       
-        }else{
-            console.error(res.data.error);  
-            throw new Error("Ocorreu um erro no servidor!");
-        }
-          
-    },
 
-    cleanCart: async () =>{
+   }
 
-        const headers = getAuthorizationHeader();
-
-        const res = await api.delete(`/cart/clean`, {headers});
-
-        if(res.status == 200){
-            return res.data;
-        }
-    },
-
-    cartItemPlus: async (id) =>{
-
-        const headers = getAuthorizationHeader();
-
-        const res = await api.put(`/cart/plus/${id}`, {headers});
-
-        if(!res.data.error){
-            return res.data;       
-        }else{
-            console.error(res.data.error);  
-            //throw new Error("Ocorreu um erro no servidor!");
-        }
-
-    },
-
-    cartItemMinus: async (id) =>{
-
-        const headers = getAuthorizationHeader();
-
-        const res = await api.put(`/cart/minus/${id}`, {headers});
-
-        if(!res.data.error){
-            return res.data;       
-        }else{
-            console.error(res.data.error);  
-            //throw new Error("Ocorreu um erro no servidor!");
-        }
-
-    },
-
-    removeCartItem: async (id) =>{
-
-        const headers = getAuthorizationHeader();
-
-        const res = await api.delete(`/cart/delete/${id}`, {headers});
-
-        if(!res.data.error){
-            return res.data;       
-        }else{
-            console.error(res.data.error);  
-           // throw new Error("Ocorreu um erro no servidor!");
-        }
-    },
-    */
-    
-    
 }

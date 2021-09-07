@@ -28,13 +28,11 @@ const getAuthorizationHeader = ()=>{
     return {};
 }
 
+
+
 const removeToken = ()=>{
 
-    let token = localStorage.getItem('token');
-    
-    if(token){
-        localStorage.removeItem('token');
-    }
+   
 }
 
 
@@ -51,8 +49,20 @@ const createOrder = async (fData) => {
 
 export default {
 
-    isLogged: async () => {
+    refreshToken: async () => {
 
+        const headers = getAuthorizationHeader();
+
+        const res = await api.get('/refresh', {headers});
+
+        if(!res.data.token){
+            localStorage.removeItem('token');
+        }else{
+            localStorage.setItem('token', res.data.token);
+        } 
+        
+        console.log(localStorage.getItem('token'))
+       
     },
 
     doLogin: async (formData) => {
@@ -118,7 +128,7 @@ export default {
     getCategories: async ()=>{
 
         const res = await api.get('/categories');
-        const json = res.data;//categories;
+        const json = res.data;
         
         return json;
     },
@@ -144,12 +154,31 @@ export default {
         
         const res = await api.get('products'+queryString);
 
-        const json = res.data;//product_list; 
+        const json = res.data;
         
         return json;
 
     },
 
+    getAvailableCities: async () => {
+
+        const res = await api.get(`/cities`);
+    
+        //console.log(res.data)
+        return res.data;
+    
+    },
+
+    getAvailableDistricts: async (city) => {
+
+        const queryString =  city ? `?city=${city}` : '';
+
+        const res = await api.get('/districts' + queryString );
+    
+        //console.log(res.data)
+        return res.data;
+    
+    },
 
     getCart: async () =>{
 
@@ -223,7 +252,7 @@ export default {
         var isOpenLightbox = window.PagSeguroLightbox(code, callback);
         // Redireciona o comprador, caso o navegador não tenha suporte ao Lightbox
         if (!isOpenLightbox){
-            window.location.href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
+            window.top.location.href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
             console.log("Redirecionamento")
         }
         

@@ -1,4 +1,4 @@
-import  React, {useState} from 'react';
+import  React, {useState, useEffect} from 'react';
 import {Container} from './styled';
 import {useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
@@ -6,6 +6,7 @@ import Form from '../Form';
 import FormInput from '../FormInput';
 import FormGroup from '../FormGroup';
 import FormButton from '../FormButton';
+import api from '../../services/api';
 
 export default ({setModalStatus}) =>{
     
@@ -24,10 +25,49 @@ export default ({setModalStatus}) =>{
     const [complement, setComplement] = useState(shipping.complement);
     const [district, setDistrict] = useState(shipping.district);
     const [postalCode, setPostalCode] = useState(shipping.postalCode);
-    const [city, setCity] = useState('São Paulo');
-    const [state, setState] = useState('SP');
+    const [city, setCity] = useState(shipping.city);
+    const [state, setState] = useState(shipping.state);
     const [country, setCountry] = useState('BRA');
 
+    const [cities, setCities] = useState([]);
+    const [districts, setDistricts] = useState([]);
+
+
+
+    useEffect(() => {
+
+        const getCities = async () => {
+
+            const res = await api.getAvailableCities();
+
+            setCities(res.cities || []);
+            
+            console.log(res.cities);
+        }
+
+        getCities();
+
+    }, []);
+
+    useEffect(() => {
+
+        const getDistricts = async () => {
+
+            const selectedCity = cities.find(c => c.name == city  );
+
+            if(!selectedCity)  return; 
+            
+            setState(selectedCity?.state || '');    
+
+            const res = await api.getAvailableDistricts( selectedCity?.id );
+            setDistricts(res.districts || []);
+
+           
+        }
+
+        getDistricts();
+
+    }, [city]);
     
     const submitHandle = (e)=>{
         
@@ -88,7 +128,13 @@ export default ({setModalStatus}) =>{
             
                 <FormGroup rowWidth={70}>
                     <label htmlFor="district">Bairro</label>
-                    <FormInput id="district" setValue={e=>setDistrict(e.target.value)}  value={district}   required />
+                    <select id="city"  value={district}  onChange={e => setDistrict(e.target.value)} required>
+                        <option>{district}</option>
+                        {
+                            districts.map(district=>(
+                                <option key={district.id}>{district.name}</option>
+                        ))}
+                    </select>
                 </FormGroup>
 
                 <FormGroup rowWidth={30}>
@@ -98,13 +144,18 @@ export default ({setModalStatus}) =>{
                 
                 <FormGroup rowWidth={70}>
                     <label htmlFor="city">Cidade</label>
-                    <select aria-readonly readOnly id="city"  value={city}  required >
+                    <select id="city"  value={city} onChange={e => setCity(e.target.value)} required>
                         <option>{city}</option>
+                        {
+                            cities.map(city=>(
+                                <option key={city.id}>{city.name}</option>
+                        ))}
                     </select>
                 </FormGroup>
+
                 <FormGroup rowWidth={30}>
                     <label htmlFor="estado">Estado</label>
-                    <select  aria-readonly readOnly name="state"  value={state}  required>
+                    <select aria-readonly readOnly name="state"  value={state} disabled required>
                         <option>{state}</option>
                     </select>
                 </FormGroup>

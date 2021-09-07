@@ -12,7 +12,7 @@ export default () =>{
     const [active, setActive] = useState(false);
 
     const user = useSelector(state=>state.user.userData);
-    const token = useSelector(state=>state.user.token);
+    const token = localStorage.getItem('token');
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -66,13 +66,13 @@ export default () =>{
         
         
         <UserMenu>            
-                {user &&
+                {user && token &&
                     <> 
                         <li><Link to="/profile">{user.email}</Link></li>
                         <li><Link to="/logout">  Sair</Link></li>
                     </>
                 }
-                {!user && 
+                {!token && 
                     <>
                         <li><Link to="/login">  Entrar </Link></li>
                         <li><Link to="/register"> Cadastrar </Link></li>

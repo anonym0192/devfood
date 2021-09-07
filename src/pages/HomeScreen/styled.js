@@ -5,13 +5,6 @@ height: 10%;
 
 `;
 
-export const NotFoundMessage = styled.div`
-font-size: 19px;
-color: #fff;
-margin: 50px 15px;
-}
-`;
-
 export const Titulo = styled.h1``;
 
 export const CategoryArea = styled.div`

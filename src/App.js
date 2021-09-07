@@ -23,13 +23,18 @@ import {ErrorMessage, SuccessMessage} from './AppStyled';
 import {loadPagSeguroLib} from './util';
 import { useEffect } from 'react';
 
+import api from './services/api';
+
 export default () => {
 
     
     const error = useSelector(state=>state.statusMessage.error);
     const success = useSelector(state=>state.statusMessage.success);
     
-    useEffect(()=>loadPagSeguroLib(), []);
+    useEffect(()=>{
+        loadPagSeguroLib();
+        api.refreshToken();
+    }, []);
     
 
     return (

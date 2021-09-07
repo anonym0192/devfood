@@ -120,7 +120,7 @@ export default () => {
             }
 
             {productsList?.length == 0 && !loading &&
-                    <NotFoundMessage>Nenhum resultado encontrado</NotFoundMessage>
+                    <NotFoundMessage>Nenhum item encontrado</NotFoundMessage>
             }
 
             <Modal status={modalStatus} setStatus={setModalStatus}>

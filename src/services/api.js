@@ -31,8 +31,7 @@ const getAuthorizationHeader = ()=>{
 
 
 const removeToken = ()=>{
-
-   
+    localStorage.removeItem('token');
 }
 
 
@@ -56,7 +55,7 @@ export default {
         const res = await api.get('/refresh', {headers});
 
         if(!res.data.token){
-            localStorage.removeItem('token');
+            removeToken();
         }else{
             localStorage.setItem('token', res.data.token);
         } 

@@ -50,6 +50,8 @@ export default {
 
     refreshToken: async () => {
 
+        if(!localStorage.getItem('token')) return ;
+
         const headers = getAuthorizationHeader();
 
         const res = await api.get('/refresh', {headers});
@@ -60,7 +62,6 @@ export default {
             localStorage.setItem('token', res.data.token);
         } 
         
-        console.log(localStorage.getItem('token'))
        
     },
 
@@ -68,8 +69,12 @@ export default {
        
         const res = await api.post('/login', formData);
        
-        if(res.status == 401){
+        if(res.status == 422 || res.status == 401){
             return {error: "Usuário e/ou senha incorretos"};
+        }
+
+        if(res.status == 500){
+            return {error: "Ocorreu um erro no servidor tente novamente mais tarde"};
         }
 
         if(res.data.token){
@@ -219,6 +224,14 @@ export default {
         const headers = getAuthorizationHeader();
         const res = await api.post(`/checkout`, fData ,{headers});
 
+
+        //Se o usuario nao estiver logado manda pra pagina de login
+        if(res.status == 401){
+            window.location.href= "/login";
+            return;
+        }
+
+        //Se ocorreu algum erro a execuçao e parada e a mensagem de erro e salva
         if(res.data.error){    
             const errorMsg = formatError(res.data.error);
             throw new Error(errorMsg);     

@@ -30,7 +30,7 @@ export default () => {
     const [modalStatus, setModalStatus] = useState(false);
     
 
-    const [couponCode, setCouponCode] = useState("");
+    const [couponCode, setCouponCode] = useState(useSelector(state=>state.cart.coupon.code));
     const inputCoupon = useRef(null);
     const [couponStatusMsg, setCouponStatusMsg] = useState("");
     
@@ -62,6 +62,7 @@ export default () => {
 
     const cleanErrorMessage = () => {
         dispatch({type: 'SET_ERROR', payload: {message: ''}});
+        
     }
     
 
@@ -166,7 +167,8 @@ export default () => {
                 //'extraAmount':'-0.01',
                 'redirectURL':process.env.REACT_APP_URL,
                 'notificationURL':process.env.REACT_APP_API_BASEURL+'/notify',
-                'deliveryCost':'3.00'
+                'discount': discount,
+                'deliveryCost': delivery
             };
 
         try{
@@ -176,8 +178,6 @@ export default () => {
 
             dispatch({type: 'SET_ERROR', payload: {message: e.message}});
         }
-
-
 
        
     }
@@ -239,7 +239,7 @@ export default () => {
                     </PriceInfoArea>
                     <PriceInfoArea>
                         <Title>Taxa de entrega</Title>
-                        <span>R$ {delivery?.toFixed(2)}</span>  
+                        <span>R$ {delivery}</span>  
                     </PriceInfoArea>
                     <PriceInfoArea>
                         <Title>Total</Title>

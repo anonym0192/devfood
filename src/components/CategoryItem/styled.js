@@ -12,9 +12,20 @@ export const Container = styled.div`
     height: 83px;
     cursor: pointer;
     transition: all ease .4s;
+
+    @media screen and (max-width: 425px){
+        width: 45px;
+        height: 45px;
+    }
 `;
 
 export const ItemImage = styled.img`
     width: 53px;
     height: 53px;
+
+    @media screen and (max-width: 425px){
+        width: 30px;
+        height: 30px;
+    }
+
 `;

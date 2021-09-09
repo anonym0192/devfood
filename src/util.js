@@ -1,6 +1,6 @@
-export const isLogged = () =>{
+/*export const isLogged = () =>{
     return localStorage.getItem('token') ? true : false;
-}
+}*/
 
 export const formatError = (errorMessage) => {
 
@@ -27,6 +27,7 @@ export const formatError = (errorMessage) => {
 
 
 export const formatNumberToReal = (number) =>{
+    if(typeof value !== 'number') return number;
     return number?.toLocaleString("pt-BR", { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' });
 }
 

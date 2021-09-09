@@ -1,11 +1,11 @@
 import React from 'react';
 import {Container, ModalBody} from './styled.js';
 
-export default ({children, status, setModalStatus})=>{
+export default ({children, status, setStatus})=>{
 
     const clickHandle = (e) => {
         if(e.target.classList.contains('modalBg')){
-           setModalStatus(false);
+           setStatus(false);
         }
     }
 

@@ -56,6 +56,8 @@ export default ({setModalStatus}) =>{
             const selectedCity = cities.find(c => c.name == city  );
 
             if(!selectedCity)  return; 
+
+            setDistrict('');
             
             setState(selectedCity?.state || '');    
 
@@ -68,6 +70,17 @@ export default ({setModalStatus}) =>{
         getDistricts();
 
     }, [city]);
+
+    useEffect(()=> {
+
+        const selectedDistrict = districts.find(d => d.name == district  );
+
+        if(!selectedDistrict)  return; 
+
+        dispatch({ type: 'SET_DELIVERY_COST', payload: { delivery: selectedDistrict.delivery_cost || 3.00 } });
+        dispatch({ type: 'CALCULATE_TOTAL' });
+        
+    }, [district]);
     
     const submitHandle = (e)=>{
         
@@ -88,11 +101,7 @@ export default ({setModalStatus}) =>{
         };
         
         dispatch({
-            type: 'SET_SHIPPING',
-            payload: {
-                shipping
-            }
-        });
+            type: 'SET_SHIPPING', payload: { shipping } });
         
         console.log("Salvando endereço de checkout");
         console.log(shipping);

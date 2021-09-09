@@ -9,6 +9,14 @@ width: 360px;
 border-top-left-radius: 10px;
 border-top-right-radius: 10px;
 cursor: pointer;
+
+
+@media screen and (max-width: 425px){
+    left: -100%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
 `;
 
 export const CartIcon = styled.img`
@@ -39,6 +47,10 @@ color: #fff;
 height: ${props=>props.show ? '583px' : '0'};
 transition: all ease 1s;
 overflow-y: auto;
+
+@media screen and (max-width: 425px){
+    height: 100%;
+}
 `;
 
 export const CartDownIcon = styled.img`

@@ -6,12 +6,21 @@ export const Container = styled.div`
     width: 738px;
     height: 375px;
     padding: 15px;
+
+    @media screen and (max-width: 720px){
+        width: 100%;
+    }
 `;
 
 export const ProductArea = styled.div`
     display: flex;
+   
     width: 100%;
-    height: 226px;   
+    height: 226px;
+    
+    @media screen and (max-width: 425px){
+        flex-direction: column;
+    }
 `;
 
 export const ButtonsArea = styled.div`
@@ -40,19 +49,40 @@ export const ButtonsArea = styled.div`
         padding: 10px 20px;
         font-size: 15px;
     }
+
+    @media screen and (max-width: 425px){
+
+        justify-content: space-between;
+
+        .btn{
+            margin: 0;
+        }
+        .addButton, .cancelButton{
+            padding: 10px 5px;
+            font-size: 15px;
+        }
+    }
 `;
 
 export const ProductImage = styled.img`
-width: 312px;
-height: 226px;
-border-radius: 15px;
-margin-right: 10px;
+    width: 312px;
+    height: 226px;
+    border-radius: 15px;
+    margin-right: 10px;
+
+    @media screen and (max-width: 425px){
+
+        width: 190px;
+        height: auto;
+    }
+
+    
 `;
 export const ProductInfo = styled.div`
 
     display: flex;
+    justify-content: space-evenly;
     flex-direction: column;
-    justify-content: space-between;
     flex: 1;
     .descArea{
         color: #fff;
@@ -92,5 +122,15 @@ export const ProductInfo = styled.div`
             margin: 0 10px;
         }
     }
+
+    @media screen and (max-width: 425px){
+        
+
+        .priceArea{
+            width: 260px;
+            padding: 10px;
+        }
+    }
+
 
 `;

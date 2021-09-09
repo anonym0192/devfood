@@ -1,7 +1,7 @@
 const initialState = {
     products: [],
     discount: 0,
-    delivery: 3,
+    delivery: 0,
     coupon: {},
     total: 0
 }
@@ -66,7 +66,7 @@ export default (state = initialState, action) => {
             let total;
 
             if(subtotal > 0){
-                total = subtotal + state.delivery - state.discount;
+                total = parseFloat(subtotal) + parseFloat(state.delivery) - parseFloat(state.discount);
             }else{
                 total = 0;
             }
@@ -88,6 +88,11 @@ export default (state = initialState, action) => {
         case 'REMOVE_COUPON':
 
             return {...state, coupon: {} , discount: 0};
+
+        case 'SET_DELIVERY_COST':
+
+            //console.log(typeof state.discount)
+            return {...state, delivery: action.payload.delivery };
     }
 
     return state;

@@ -264,7 +264,7 @@ export default {
         var isOpenLightbox = window.PagSeguroLightbox(code, callback);
         // Redireciona o comprador, caso o navegador não tenha suporte ao Lightbox
         if (!isOpenLightbox){
-            window.top.location.href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
+            window.top.location="https://pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
             console.log("Redirecionamento")
         }
         

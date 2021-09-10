@@ -32,7 +32,7 @@ Backend API version :  https://github.com/anonym0192/devfood_api
 
 -Pagination
 
-## Main libs used
+## Libs used in project
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",

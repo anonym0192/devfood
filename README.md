@@ -32,7 +32,18 @@ Backend API version :  https://github.com/anonym0192/devfood_api
 
 -Pagination
 
-## Technology used
+## Main libs used
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "axios": "^0.21.1",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "react-tooltip": "^4.2.21",
+    "redux": "^4.1.0",
+    "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.0"
 
 ## Configuration
 

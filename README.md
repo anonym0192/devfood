@@ -1,3 +1,43 @@
+# Devfood Front-end
+A Food E-commerce front-end system made using React
+
+Backend API version :  https://github.com/anonym0192/devfood_api
+
+## Features
+-Register a new User
+ 
+-Update the User profile info
+
+-Login using Token
+
+-List products to buy
+
+-Filter products by name
+
+-Filter products by category
+
+-Add and remove Items in Shopping Cart
+
+-Calculate the Shopping Cart Total
+
+-Save Shipping info
+
+-Checkout using Pagseguro
+
+-Visualize List of Orders
+
+-Calculate Shipping price depending of Area
+
+-Calculate Discount using Coupons
+
+-Pagination
+
+## Technology used
+
+## Configuration
+
+This system needs the backend API to work properly. You need to fill your Backend Api Path in the .env file, inform the path in the following field "APP_API_BASEURL";
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

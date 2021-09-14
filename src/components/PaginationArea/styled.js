@@ -15,4 +15,5 @@ export const PaginationItem = styled.div`
     border-radius: 3px;
     cursor: pointer;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.57);
+    margin-bottom: 7px;
 `;

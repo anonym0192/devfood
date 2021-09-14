@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import {useDispatch} from 'react-redux';
 import {Container, ProductArea, ButtonsArea, ProductImage, ProductInfo} from './styled.js';
 
-export default ({data, status, setStatus})=>{
+export default ({data, status, setModalStatus})=>{
     
      const [qt, setQt]= useState(1);
      const dispatch = useDispatch();  
      
      const HandleClickCancel = () => {
-        setStatus(false);
+        setModalStatus(false);
      }
      
      const HandleAddToCart = () => {
@@ -22,7 +22,7 @@ export default ({data, status, setStatus})=>{
         });
 
         dispatch({type: 'CALCULATE_TOTAL'});
-        setStatus(false);
+        setModalStatus(false);
 
     }
 

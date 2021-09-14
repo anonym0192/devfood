@@ -123,8 +123,8 @@ export default () => {
                     <NotFoundMessage>Nenhum item encontrado</NotFoundMessage>
             }
 
-            <Modal status={modalStatus} setStatus={setModalStatus}>
-                <ProductModal data={selectedProduct} status={modalStatus} setStatus={setModalStatus}/>
+            <Modal status={modalStatus} setModalStatus={setModalStatus}>
+                <ProductModal data={selectedProduct} status={modalStatus} setModalStatus={setModalStatus}/>
             </Modal>
         </Container>
     );

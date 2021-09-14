@@ -21,6 +21,10 @@ export const ProductImgArea = styled.div`
         width: 100%;
         border-radius: 5px;
     }
+
+    @media screen and (max-width: 425px){
+        width: auto;
+    }
 `; 
 
 export const ProductInfoArea = styled.div`
@@ -42,6 +46,13 @@ export const ProductInfoArea = styled.div`
     .description {
         font-size: 13px;
     }
+
+    @media screen and (max-width: 425px){
+        .name{
+            font-size: 19px;
+        }
+    }
+
 `; 
 
 export const ProductButtonArea = styled.div`

@@ -9,7 +9,7 @@ export default () => {
     
     useEffect(() =>{
         
-        history.push('/orders');
+        history.push('/');
 
         dispatch({
             type: 'SET_SUCCESS',

@@ -74,7 +74,7 @@ export default (state = initialState, action) => {
             return {...state, total: total};
 
         case 'CLEAR_CART':
-            return {...state, products: []};
+            return {...state, products: [], total: 0};
 
         case 'APPLY_COUPON':
 

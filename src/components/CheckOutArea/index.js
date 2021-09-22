@@ -42,7 +42,7 @@ export default ({setModalStatus}) =>{
 
             setCities(res.cities || []);
             
-            console.log(res.cities);
+            //console.log(res.cities);
         }
 
         getCities();
@@ -103,8 +103,8 @@ export default ({setModalStatus}) =>{
         dispatch({
             type: 'SET_SHIPPING', payload: { shipping } });
         
-        console.log("Salvando endereço de checkout");
-        console.log(shipping);
+        //console.log("Salvando endereço de checkout");
+        //console.log(shipping);
 
         setModalStatus(false);
     }

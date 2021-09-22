@@ -29,7 +29,7 @@ export default  () =>{
                 }
         
                 if(res.orders){
-                    console.log(res.orders);
+                    //console.log(res.orders);
                     setOrders(res.orders);
                     setTotalPages(res.total_pages);
      
@@ -56,7 +56,6 @@ export default  () =>{
                         <TableHead>Nº pedido</TableHead>
                         <TableHead>Itens</TableHead>
                         <TableHead>Total</TableHead>
-                        <TableHead>Pagamento</TableHead>
                         <TableHead>Status</TableHead>
                     </TableRow>
                 </thead>
@@ -74,7 +73,7 @@ export default  () =>{
                                     )}
                                 </TableColumn>
                                 <TableColumn> R$ {item.total}</TableColumn>
-                                <TableColumn>{item.payment_type}</TableColumn>
+                                
                                 <TableColumn>{item.status}</TableColumn>
                             </TableRow>
                         ))

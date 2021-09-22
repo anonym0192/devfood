@@ -253,7 +253,7 @@ export default {
 
                 console.log("Compra feita com sucesso, código de transação: " + transactionCode);
 
-                window.location.href(`/thankyou/${transactionCode}`);
+                window.location.href = `/thankyou/${transactionCode}`;
             },
             abort : function() {
                 //Insira os comandos para quando o usuário abandonar a tela de pagamento.

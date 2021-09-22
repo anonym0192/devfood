@@ -79,7 +79,7 @@ export default () => {
                 setError(formatError(res.error));
                 return;
             }
-            console.log(res.user);
+            //console.log(res.user);
             if(res.user){
                 dispatch({ type: 'SET_USER', payload: {userData: res.user} });
                 setSuccess( isPasswordUpdate ? 'Senha atualizada com sucesso!' : 'Informações atualizadas com sucesso!' );

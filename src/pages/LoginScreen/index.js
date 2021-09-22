@@ -48,7 +48,7 @@ export default  () =>{
             if(res.token){
                dispatch({ type: 'SET_TOKEN', payload: {token: res.token} });
     
-               console.log(res.user);
+               //console.log(res.user);
                dispatch({ type: 'SET_USER', payload: {userData: res.user} });
     
                history.push('/');

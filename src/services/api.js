@@ -73,13 +73,10 @@ export default {
             return {error: "Usuário e/ou senha incorretos"};
         }
 
-        if(res.status == 500){
-            return {error: "Ocorreu um erro no servidor tente novamente mais tarde"};
-        }
-
+        if(res.status == 500) return {error: "Ocorreu um erro no servidor tente novamente mais tarde"};
+        
         if(res.data.token){
-            localStorage.setItem('token', res.data.token);
-           
+            localStorage.setItem('token', res.data.token);   
         }
 
         return res.data;
@@ -93,13 +90,10 @@ export default {
 
         const res = await api.get('/logout', {headers});
 
-        localStorage.removeItem('token');
-        
+        removeToken();
             
-        if(res.status == 401){
-            removeToken();
-            return {error: "Usuário não logado"};
-        }
+        if(res.status == 401) return {error: "Usuário não logado"};
+        
         return res.data;
         
 
@@ -107,6 +101,10 @@ export default {
     createUser: async (formData) => {
 
         const res = await api.post('/register', formData);
+
+        if(res.status == 500) return {error: "Ocorreu um erro no servidor tente novamente mais tarde"};
+        
+        if(res.data.token) localStorage.setItem('token', res.data.token);   
 
         return res.data;
        
@@ -119,6 +117,8 @@ export default {
  
         const res = await api.put(`/user/${id}`, formData, {headers});
 
+        if(res.status == 500) return {error: "Ocorreu um erro no servidor tente novamente mais tarde"};
+        
         if(res.status == 401){
 
             removeToken();

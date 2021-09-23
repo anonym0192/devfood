@@ -16,10 +16,10 @@ export default () => {
     const id = useSelector(state=>state.user.userData.id);
     const [name, setName] = useState(useSelector(state=>state.user.userData.name));
     const [email, setEmail] = useState(useSelector(state=>state.user.userData.email));
-    const [areacode, setAreacode] = useState(useSelector(state=>state.user.userData.areacode));
+    const [areacode, setAreacode] = useState(useSelector(state=>state.user.userData.area_code));
     const [phone, setPhone] = useState(useSelector(state=>state.user.userData.phone));
     const [cpf, setCpf] = useState(useSelector(state=>state.user.userData.cpf));
-    const [bornDate, setBornDate] = useState(useSelector(state=>state.user.userData.bornDate));
+    const [bornDate, setBornDate] = useState(useSelector(state=>state.user.userData.born_date));
    // const [username, setUsername] = useState(useSelector(state=>state.user.userData.username));
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -27,9 +27,10 @@ export default () => {
     const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
 
+    const user = useSelector(state=>state.user.userData);
     const dispatch = useDispatch();
     const history = useHistory();
-
+    console.log(user);
     const cleanPasswordForm = () => {
         setPassword('');
         setPasswordConfirm('');
@@ -53,9 +54,9 @@ export default () => {
             fData.append('email', email);
             fData.append('name', name);
             fData.append('phone', phone);
-            fData.append('areacode', areacode);
+            fData.append('area_code', areacode);
             fData.append('cpf', cpf);
-            fData.append('bornDate', bornDate);
+            fData.append('born_date', bornDate);
            // fData.append('username', username);
         }else{
 

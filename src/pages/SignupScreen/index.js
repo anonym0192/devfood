@@ -48,9 +48,9 @@ export default () => {
         fData.append('name', name);
         fData.append('email', email);
         fData.append('phone', phone);
-        fData.append('areacode', areacode);
+        fData.append('area_code', areacode);
         fData.append('cpf', cpf);
-        fData.append('bornDate', bornDate);
+        fData.append('born_date', bornDate);
         fData.append('password', password);
         //fData.append('username', username);
         fData.append('password', password);
@@ -63,17 +63,12 @@ export default () => {
                 setError(formatError(res.error));
                 return;
             }
-
             
             if(res.token){
+                
                dispatch({ type: 'SET_TOKEN', payload: {token: res.token} });
                dispatch({ type: 'SET_USER', payload: {userData: res.user} });
 
-               /*Gambiarra*/
-
-               localStorage.setItem('token', res.token);
-               
-    
                history.push('/');
             }
         }catch(e){
@@ -95,27 +90,27 @@ export default () => {
             <Form title="Cadastrar novo usuário" submitHandle={submitHandle}>
                 
                 <FormGroup>
-                    <FormInput setValue={e=>setName(e.target.value)} name="name" type="text" placeholder="Nome Completo"/>
+                    <FormInput setValue={e=>setName(e.target.value)} name="name" type="text" placeholder="Nome Completo" required/>
                 </FormGroup>
                 <FormGroup>
-                    <FormInput setValue={e=>setEmail(e.target.value)} name="email" type="email" placeholder="E-mail"/>
+                    <FormInput setValue={e=>setEmail(e.target.value)} name="email" type="email" placeholder="E-mail" required/>
                 </FormGroup>
                 <FormGroup>
-                    <FormInput setValue={e=>setCpf(e.target.value)} name="cpf" type="text" placeholder="CPF"/>
+                    <FormInput setValue={e=>setCpf(e.target.value)} name="cpf" type="text" placeholder="CPF" required/>
                 </FormGroup>
                 <FormGroup>
-                    <FormInput setValue={e=>setBornDate(e.target.value)} name="borndate" type="date" placeholder="Data de Nascimento"/>
+                    <FormInput setValue={e=>setBornDate(e.target.value)} name="born_date" type="date" placeholder="Data de Nascimento" required/>
                 </FormGroup>
                 <FormGroup>
-                    <FormInput setValue={e=>setAreacode(e.target.value)} name="areacode" type="text" placeholder="Area" style={{width: '20%'}} />
-                    <FormInput setValue={e=>setPhone(e.target.value)} name="phone" type="text" placeholder="Telefone"/>
+                    <FormInput setValue={e=>setAreacode(e.target.value)} name="area_code" type="text" placeholder="Area" style={{width: '20%'}} />
+                    <FormInput setValue={e=>setPhone(e.target.value)} name="phone" type="text" placeholder="Telefone" />
                 </FormGroup>
                 
                 <FormGroup>
-                    <FormInput setValue={e=>setPassword(e.target.value)} name="password" type="password" placeholder="Senha"/>
+                    <FormInput setValue={e=>setPassword(e.target.value)} name="password" type="password" placeholder="Senha" required/>
                 </FormGroup>
                 <FormGroup>
-                    <FormInput setValue={e=>setPasswordConfirm(e.target.value)} name="password_confirm" type="password" placeholder="Confirmação de Senha"/>
+                    <FormInput setValue={e=>setPasswordConfirm(e.target.value)} name="password_confirm" type="password" placeholder="Confirmação de Senha" required/>
                 </FormGroup>
                 <FormButton text="Cadastrar" type="submit"/>
             </Form>

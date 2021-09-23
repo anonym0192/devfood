@@ -47,7 +47,7 @@ Backend API version :  https://github.com/anonym0192/devfood_api
 
 ## Configuration
 
-This system needs the backend API to work properly. You need to fill your Backend Api Path in the .env file, inform the path in the following field "APP_API_BASEURL";
+This system needs the backend API to work properly. Backend Api Path in the .env file must be filled, inform the path in the following field "APP_API_BASEURL";
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

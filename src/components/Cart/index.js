@@ -30,7 +30,7 @@ export default () => {
     const [modalStatus, setModalStatus] = useState(false);
     
 
-    const [couponCode, setCouponCode] = useState(useSelector(state=>state.cart.coupon.code));
+    const [couponCode, setCouponCode] = useState(useSelector(state=>state.cart.coupon?.code));
     const inputCoupon = useRef(null);
     const [couponStatusMsg, setCouponStatusMsg] = useState("");
     

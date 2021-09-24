@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
                 });
             }
             
-            console.log(products);
+            //console.log(products);
 
             return {...state, products};
             

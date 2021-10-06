@@ -12,11 +12,7 @@ cursor: pointer;
 
 
 @media screen and (max-width: 425px){
-    left: -100%;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 100%;
+    width: 90%;
 `;
 
 export const CartIcon = styled.img`
@@ -49,7 +45,7 @@ transition: all ease 1s;
 overflow-y: auto;
 
 @media screen and (max-width: 425px){
-    height: 100%;
+    //height: 100%;
 }
 `;
 

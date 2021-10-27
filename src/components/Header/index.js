@@ -37,11 +37,13 @@ export default () =>{
         }
         
         searchTimer = setTimeout(() => {
-            history.push('/');
+            
             dispatch({
                 type: 'SET_SEARCH',
                 payload: {searchValue: input}
             }); 
+
+            history.push('/');
             
         },2000); 
     }

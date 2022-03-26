@@ -30,7 +30,8 @@ export default () => {
     const user = useSelector(state=>state.user.userData);
     const dispatch = useDispatch();
     const history = useHistory();
-    console.log(user);
+    
+    
     const cleanPasswordForm = () => {
         setPassword('');
         setPasswordConfirm('');

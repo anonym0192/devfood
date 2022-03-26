@@ -41,9 +41,20 @@ const createOrder = async (fData) => {
     const headers = getAuthorizationHeader();
     const res = await api.post('/order', fData, {headers});
 
-    if(res.data){
-        return res.data;
+    console.log(res.data);
+    if(res.status == 401){
+        window.location.href= "/login";
+        return;
     }
+
+    if(!res.data || res.data.error ){
+        throw new Error(res.data.error || "Ocorreu um erro ao criar a o pedido!");
+    }
+    
+    else{
+        return res.data.order['id'];
+    }
+    
 }
 
 export default {
@@ -221,7 +232,15 @@ export default {
 
     doCheckOut: async (fData) =>{
 
+ 
         const headers = getAuthorizationHeader();
+
+        const order = await createOrder(fData);
+
+        //console.log(order);
+
+        fData['order_id'] = order;
+
         const res = await api.post(`/checkout`, fData ,{headers});
 
 
@@ -249,7 +268,6 @@ export default {
                 fData.transactionCode = transactionCode;
                 fData.paymentType = 1;
 
-                await createOrder(fData);
 
                 console.log("Compra feita com sucesso, código de transação: " + transactionCode);
 
